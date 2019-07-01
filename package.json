@@ -1,0 +1,27 @@
+{
+  "name": "property-app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prvnbist/react-express-heroku.git"
+  },
+  "author": "Praveen Bisht",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prvnbist/react-express-heroku/issues"
+  },
+  "homepage": "https://github.com/prvnbist/react-express-heroku#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "description": ""
+}
