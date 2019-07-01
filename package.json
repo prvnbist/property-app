@@ -16,7 +16,6 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "lint": "eslint --fix . && echo 'Lint complete.'",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
@@ -31,7 +30,6 @@
     "validator": "^11.0.0"
   },
   "devDependencies": {
-    "eslint": "^6.0.1",
     "nodemon": "^1.19.1"
   }
 }
