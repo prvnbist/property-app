@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -5,6 +7,7 @@ const path = require('path');
 const passport = require('passport');
 
 const users = require('./routes/api/users');
+const properties = require('./routes/api/properties');
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -17,10 +20,9 @@ app.use(
 );
 app.use(bodyParser.json());
 // DB Config
-const db = require('./config/keys').mongoURI;
 // Connect to MongoDB
 mongoose
-    .connect(db, {
+    .connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
     })
     .then(() => console.log('MongoDB successfully connected'))
@@ -34,12 +36,7 @@ require('./config/passport')(passport);
 
 // Routes
 app.use('/api/users', users);
-
-app.get('/yo', (req, res) =>
-    res.send({
-        yo: 'Me',
-    }),
-);
+app.use('/api/properties', properties);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));

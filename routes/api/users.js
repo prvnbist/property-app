@@ -1,14 +1,18 @@
+require('dotenv').config();
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
 
 // Load input validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
-// Load User model
+// Authorize Requests
+const authorize = require('../../validation/authorize');
+
+// Load models
 const User = require('../../models/User');
 
 // @route POST api/users/register
@@ -83,7 +87,7 @@ router.post('/login', (req, res) => {
                 // Sign token
                 jwt.sign(
                     payload,
-                    keys.key,
+                    process.env.HASH_SECRET,
                     {
                         expiresIn: 24 * 60 * 60 * 1000,
                     },
@@ -101,6 +105,29 @@ router.post('/login', (req, res) => {
                 });
             }
         });
+    });
+});
+
+// @route GET api/users/:id
+// @desc Get a user
+// @access Protected
+router.get('/:id', authorize, (req, res) => {
+    jwt.verify(req.token, process.env.HASH_SECRET, (err, user) => {
+        if (err) {
+            res.status(403).json({
+                error: "You're not authorized!",
+                status: 403,
+            });
+        }
+        User.findById(req.params.id)
+            .populate('properties')
+            .exec((err, doc) => {
+                if (err)
+                    return res.status(404).json({
+                        error: "Can't get properties list!",
+                    });
+                res.status(200).json(doc);
+            });
     });
 });
 

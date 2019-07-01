@@ -15,6 +15,12 @@ const UserSchema = new Schema(
             type: String,
             required: true,
         },
+        properties: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'properties',
+            },
+        ],
     },
     {
         timestamps: true,
