@@ -3,9 +3,11 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
+
 // Load input validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+
 // Load User model
 const User = require('../../models/User');
 
@@ -15,6 +17,7 @@ const User = require('../../models/User');
 router.post('/register', (req, res) => {
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
+
     // Check validation
     if (!isValid) {
         return res.status(400).json(errors);
@@ -30,6 +33,7 @@ router.post('/register', (req, res) => {
                 email: req.body.email,
                 password: req.body.password,
             });
+
             // Hash password before saving in database
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -63,8 +67,9 @@ router.post('/login', (req, res) => {
         if (!user) {
             return res
                 .status(404)
-                .json({ emailnotfound: 'Email not found' });
+                .json({ error: 'Email not found', status: 404 });
         }
+
         // Check password
         bcrypt.compare(password, user.password).then(isMatch => {
             if (isMatch) {
@@ -74,12 +79,13 @@ router.post('/login', (req, res) => {
                     id: user.id,
                     name: user.name,
                 };
+
                 // Sign token
                 jwt.sign(
                     payload,
                     keys.key,
                     {
-                        expiresIn: 31556926, // 1 year in seconds
+                        expiresIn: 24 * 60 * 60 * 1000,
                     },
                     (err, token) => {
                         res.json({
@@ -90,7 +96,8 @@ router.post('/login', (req, res) => {
                 );
             } else {
                 return res.status(400).json({
-                    passwordincorrect: 'Password incorrect',
+                    error: 'Password incorrect',
+                    status: 400,
                 });
             }
         });
