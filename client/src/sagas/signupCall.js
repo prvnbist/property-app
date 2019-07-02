@@ -1,4 +1,4 @@
-const signUpCall = async ({ payload }) => {
+const signupCall = async ({ payload }) => {
     try {
         const response = await fetch('/api/users/register', {
             method: 'POST',
@@ -13,10 +13,9 @@ const signUpCall = async ({ payload }) => {
             }),
         });
         const data = await response.json();
-        console.log('TCL: signUpCall -> data', data);
-        return '';
+        return data;
     } catch (e) {
         console.log(e);
     }
 };
-export default signUpCall;
+export default signupCall;

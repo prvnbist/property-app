@@ -3,11 +3,13 @@ import {
     RECIEVE_PROPERTIES,
     LOGOUT,
     SIGNUP,
+    SIGNUP_ERROR,
 } from '../actions/types';
 import jwtDecode from 'jwt-decode';
 
 const initialState = {
     currentUser: {},
+    errors: {},
     properties: [],
 };
 
@@ -33,6 +35,21 @@ const rootReducer = (state = initialState, action) => {
         }
         case SIGNUP: {
             return state;
+        }
+        case SIGNUP_ERROR: {
+            if (action.payload.error) {
+                return {
+                    ...state,
+                    errors: {
+                        message: action.payload.error,
+                    },
+                };
+            } else {
+                return {
+                    ...state,
+                    errors: {},
+                };
+            }
         }
         case RECIEVE_PROPERTIES:
             return {

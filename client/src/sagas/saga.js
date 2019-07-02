@@ -5,11 +5,15 @@ import {
     LOGIN_REQUEST,
     SIGNUP,
 } from '../actions/types';
-import { recieveProperties, loginToken } from '../actions/creators';
+import {
+    recieveProperties,
+    loginToken,
+    signupError,
+} from '../actions/creators';
 
 import { fetchProperties } from './fetchProperties';
 import loginCall from './loginCall';
-import signUpCall from './signupCall';
+import signupCall from './signupCall';
 
 function* getAllProperties() {
     try {
@@ -31,8 +35,8 @@ function* loginUser(payload) {
 
 function* signupUser(payload) {
     try {
-        const data = yield call(loginCall, payload);
-        yield put(loginToken(data));
+        const data = yield call(signupCall, payload);
+        yield put(signupError(data));
     } catch (e) {
         console.log(e);
     }

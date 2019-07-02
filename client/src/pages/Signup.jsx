@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 
 import Navbar from '../components/Navbar';
 
-import { loginRequest } from '../actions/creators';
+import { signup } from '../actions/creators';
 
-const Signup = () => {
+const Signup = props => {
+    const [errors, setErrors] = React.useState('');
     const SignupSchema = Yup.object().shape({
         name: Yup.string()
             .min(4, 'Name is too short!')
@@ -40,48 +41,28 @@ const Signup = () => {
                     </div>
                     <div className="login__form">
                         <h3>Signup</h3>
+                        {errors && (
+                            <span className="error__message">
+                                {errors}
+                            </span>
+                        )}
                         <Formik
                             initialValues={{
-                                email: '',
-                                password: '',
-                                name: '',
+                                email: 'bezzle0@time.com',
+                                password: 'HFzSct1@',
+                                name: 'Bartholomeo Ezzle',
                             }}
                             validationSchema={SignupSchema}
                             onSubmit={(values, { setSubmitting }) => {
+                                props.signup(values);
                                 setTimeout(() => {
-                                    alert(
-                                        JSON.stringify(
-                                            values,
-                                            null,
-                                            2,
-                                        ),
-                                    );
-                                    fetch('/api/users/register', {
-                                        method: 'POST',
-                                        headers: {
-                                            Accept:
-                                                'application/json',
-                                            'Content-Type':
-                                                'application/json',
-                                        },
-                                        body: JSON.stringify({
-                                            name: values.name,
-                                            email: values.email,
-                                            password: values.password,
-                                        }),
-                                    })
-                                        .then(data =>
-                                            console.log(
-                                                'Request success: ',
-                                                data,
-                                            ),
-                                        )
-                                        .catch(error =>
-                                            console.log(
-                                                'Request failure: ',
-                                                error,
-                                            ),
+                                    if (props.errors.message) {
+                                        setErrors(
+                                            props.errors.message,
                                         );
+                                    } else {
+                                        props.history.push('/login');
+                                    }
                                     setSubmitting(false);
                                 }, 400);
                             }}
@@ -164,4 +145,13 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+const mapStateToProps = state => ({ errors: state.errors });
+
+const mapDispatchToProps = dispatch => ({
+    signup: value => dispatch(signup(value)),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Signup);

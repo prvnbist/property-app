@@ -3,6 +3,7 @@ import {
     LOGIN_TOKEN,
     LOGOUT,
     SIGNUP,
+    SIGNUP_ERROR,
     REQUEST_PROPERTIES,
     RECIEVE_PROPERTIES,
 } from './types';
@@ -23,6 +24,11 @@ export const logout = () => ({
 
 export const signup = payload => ({
     type: SIGNUP,
+    payload,
+});
+
+export const signupError = payload => ({
+    type: SIGNUP_ERROR,
     payload,
 });
 
