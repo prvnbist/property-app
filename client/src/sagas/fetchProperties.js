@@ -1,4 +1,4 @@
-export const fetchData = async () => {
+export const fetchProperties = async () => {
     try {
         const response = await fetch('/api/properties/');
         const data = await response.json();

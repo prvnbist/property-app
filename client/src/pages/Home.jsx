@@ -1,5 +1,4 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Navbar from '../components/Navbar';
@@ -11,7 +10,7 @@ class Home extends React.Component {
         this.props.requestProperties();
     }
     render() {
-        const data = this.props.property;
+        const data = this.props.properties;
         return (
             <div>
                 <Navbar />
@@ -41,10 +40,11 @@ class Home extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ property: state.property });
+const mapStateToProps = state => ({ properties: state.properties });
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators({ requestProperties }, dispatch);
+const mapDispatchToProps = dispatch => ({
+    requestProperties: () => dispatch(requestProperties()),
+});
 
 export default connect(
     mapStateToProps,

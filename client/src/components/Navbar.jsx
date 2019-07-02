@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Navbar = () => {
+import { logout } from '../actions/creators';
+
+const Navbar = props => {
     return (
         <nav>
             <div className="container__fluid">
@@ -9,28 +12,51 @@ const Navbar = () => {
                     <span id="logo">
                         <Link to="/">Fresh Estates</Link>
                     </span>
-                    <div>
-                        <Link to="/login">
-                            <button
-                                type="button"
-                                className="btn btn__outline btn__dark__bg"
-                            >
-                                Login
-                            </button>
-                        </Link>
-                        <Link to="/signup">
-                            <button
-                                type="button"
-                                className="btn btn__primary"
-                            >
-                                Signup
-                            </button>
-                        </Link>
-                    </div>
+                    {Object.keys(props.currentUser).length !== 0 ? (
+                        <div>
+                            <Link to="/">
+                                <button
+                                    type="button"
+                                    className="btn btn__primary"
+                                    onClick={() => props.logout()}
+                                >
+                                    Logout
+                                </button>
+                            </Link>
+                        </div>
+                    ) : (
+                        <div>
+                            <Link to="/login">
+                                <button
+                                    type="button"
+                                    className="btn btn__outline btn__dark__bg"
+                                >
+                                    Login
+                                </button>
+                            </Link>
+                            <Link to="/signup">
+                                <button
+                                    type="button"
+                                    className="btn btn__primary"
+                                >
+                                    Signup
+                                </button>
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
         </nav>
     );
 };
 
-export default Navbar;
+const mapStateToProps = state => ({ currentUser: state.currentUser });
+
+const mapDispatchToProps = dispatch => ({
+    logout: () => dispatch(logout()),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Navbar);

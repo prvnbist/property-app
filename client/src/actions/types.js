@@ -1,4 +1,6 @@
-export const LOGIN = 'LOGIN';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_TOKEN = 'LOGIN_TOKEN';
+export const LOGOUT = 'LOGOUT';
 export const SIGNUP = 'SIGNUP';
 export const REQUEST_PROPERTIES = 'REQUEST_PROPERTIES';
 export const RECIEVE_PROPERTIES = 'RECIEVE_PROPERTIES';
