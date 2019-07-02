@@ -10,18 +10,22 @@ const Navbar = () => {
                         <Link to="/">Fresh Estates</Link>
                     </span>
                     <div>
-                        <button
-                            type="button"
-                            className="btn btn__outline btn__dark__bg"
-                        >
-                            <Link to="/login">Login</Link>
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn__primary"
-                        >
-                            <Link to="/signup">Signup</Link>
-                        </button>
+                        <Link to="/login">
+                            <button
+                                type="button"
+                                className="btn btn__outline btn__dark__bg"
+                            >
+                                Login
+                            </button>
+                        </Link>
+                        <Link to="/signup">
+                            <button
+                                type="button"
+                                className="btn btn__primary"
+                            >
+                                Signup
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

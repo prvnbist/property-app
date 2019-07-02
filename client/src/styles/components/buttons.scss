@@ -1,0 +1,21 @@
+.btn {
+    padding: 0 16px;
+    height: 40px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 25px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn__primary {
+    background: #F8A039;
+    color: #fff;
+}
+
+.btn__outline {
+    border: 1px solid #FFFFFF;
+    background: transparent;
+    color: #fff;
+}

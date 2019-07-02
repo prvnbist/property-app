@@ -1,0 +1,25 @@
+nav {
+    background: #1152CF;
+    height: 64px;
+    border-bottom: 1px solid #376DD5;
+    .container {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        button {
+            margin-left: 16px;
+        }
+    }
+}
+
+#logo {
+    a {
+        text-decoration: none;
+        color: #FFFFFF;
+        font-style: normal;
+        font-weight: 450;
+        font-size: 18px;
+        line-height: 23px;
+    }
+}

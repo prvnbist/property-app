@@ -1,0 +1,17 @@
+header {
+    height: 188px;
+    background: #1152CF;
+}
+
+main {
+    z-index: 10;
+    transform: translateY(-24px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 24px;
+    .property__card {
+        height: 367px;
+        background: #FFFFFF;
+        border: 1px solid #E5EDF1;
+    }
+}

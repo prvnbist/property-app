@@ -11,15 +11,31 @@ class Home extends React.Component {
         this.props.requestProperties();
     }
     render() {
-        console.log(this.props.property);
+        const data = this.props.property;
         return (
-            <div className="Home">
+            <div>
                 <Navbar />
-                <div className="container">
-                    {/* {this.state.property.map(property => (
-                        <span>{property.name}</span>
-                    ))} */}
-                </div>
+                <header className="container__fluid homepage__header">
+                    <div className="container">header</div>
+                </header>
+                <main className="container">
+                    {!data ? (
+                        <div>Loading...</div>
+                    ) : (
+                        data.map(property => (
+                            <div
+                                className="property__card"
+                                key={property._id}
+                            >
+                                <div className="property__card__thumbnail" />
+                                <div className="property__card__details">
+                                    <span>{property.name}</span>
+                                    <span>{property.price}</span>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </main>
             </div>
         );
     }
