@@ -45,10 +45,14 @@ const Login = props => {
                         ) => {
                             props.login(values);
                             setTimeout(() => {
-                                if (props.errors.message) {
-                                    resetForm();
-                                } else {
+                                if (
+                                    Object.keys(props.errors)
+                                        .length === 0 &&
+                                    props.currentUser.id
+                                ) {
                                     props.history.push('/');
+                                } else {
+                                    resetForm();
                                 }
                                 setSubmitting(false);
                             }, 500);

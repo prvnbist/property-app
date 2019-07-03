@@ -14,6 +14,17 @@ const Navbar = props => {
                     </span>
                     {Object.keys(props.currentUser).length !== 0 ? (
                         <div>
+                            <span style={{ color: '#fff' }}>
+                                {props.currentUser.name}
+                            </span>
+                            <Link to="/create">
+                                <button
+                                    type="button"
+                                    className="btn btn__outline"
+                                >
+                                    Create
+                                </button>
+                            </Link>
                             <Link to="/">
                                 <button
                                     type="button"
