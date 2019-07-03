@@ -8,7 +8,6 @@ import Navbar from '../components/Navbar';
 import { login } from '../actions/creators';
 
 const Login = props => {
-    const [errors, setErrors] = React.useState('');
     const LoginSchema = Yup.object().shape({
         email: Yup.string()
             .email('Please enter a valid email!')
@@ -28,9 +27,9 @@ const Login = props => {
                 </div>
                 <div className="login__form">
                     <h3>Login</h3>
-                    {errors && (
+                    {props.errors.message && (
                         <span className="error__message">
-                            {errors}
+                            {props.errors.message}
                         </span>
                     )}
                     <Formik
@@ -46,9 +45,9 @@ const Login = props => {
                             props.login(values);
                             setTimeout(() => {
                                 if (
-                                    Object.keys(props.errors)
-                                        .length === 0 &&
-                                    props.currentUser.id
+                                    localStorage.getItem(
+                                        'access-token',
+                                    )
                                 ) {
                                     props.history.push('/');
                                 } else {

@@ -13,7 +13,11 @@ const signupCall = async ({ payload }) => {
             }),
         });
         const data = await response.json();
-        return data;
+        if (data.error) {
+            return data;
+        } else {
+            return data.token.split(' ')[1];
+        }
     } catch (e) {
         console.log(e);
     }

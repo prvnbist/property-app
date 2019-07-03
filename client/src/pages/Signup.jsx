@@ -8,7 +8,6 @@ import Navbar from '../components/Navbar';
 import { signup } from '../actions/creators';
 
 const Signup = props => {
-    const [errors, setErrors] = React.useState('');
     const SignupSchema = Yup.object().shape({
         name: Yup.string()
             .min(4, 'Name is too short!')
@@ -41,9 +40,9 @@ const Signup = props => {
                     </div>
                     <div className="login__form">
                         <h3>Signup</h3>
-                        {errors && (
+                        {props.errors.message && (
                             <span className="error__message">
-                                {errors}
+                                {props.errors.message}
                             </span>
                         )}
                         <Formik
@@ -59,10 +58,14 @@ const Signup = props => {
                             ) => {
                                 props.signup(values);
                                 setTimeout(() => {
-                                    if (props.errors.message) {
-                                        resetForm();
+                                    if (
+                                        localStorage.getItem(
+                                            'access-token',
+                                        )
+                                    ) {
+                                        props.history.push('/');
                                     } else {
-                                        props.history.push('/login');
+                                        resetForm();
                                     }
                                     setSubmitting(false);
                                 }, 400);
@@ -87,7 +90,7 @@ const Signup = props => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.name}
-                                    />
+                                    />{' '}
                                     {touched.name && errors.name && (
                                         <span className="error__message">
                                             {errors.name}
@@ -104,7 +107,7 @@ const Signup = props => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.email}
-                                    />
+                                    />{' '}
                                     {touched.email &&
                                         errors.email && (
                                             <span className="error__message">
@@ -122,7 +125,7 @@ const Signup = props => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.password}
-                                    />
+                                    />{' '}
                                     {touched.password &&
                                         errors.password && (
                                             <span className="error__message">
