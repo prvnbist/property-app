@@ -1,9 +1,8 @@
 import {
-    LOGIN_TOKEN,
-    RECIEVE_PROPERTIES,
+    FETCH_PROPERTIES,
     LOGOUT,
-    SIGNUP,
-    SIGNUP_ERROR,
+    LOGIN_REDUCER,
+    SIGNUP_REDUCER,
 } from '../actions/types';
 import jwtDecode from 'jwt-decode';
 
@@ -11,11 +10,12 @@ const initialState = {
     currentUser: {},
     errors: {},
     properties: [],
+    property: {},
 };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOGIN_TOKEN: {
+        case LOGIN_REDUCER: {
             if (action.payload.error) {
                 return {
                     ...state,
@@ -28,7 +28,7 @@ const rootReducer = (state = initialState, action) => {
                 const user = jwtDecode(action.payload);
                 return {
                     ...state,
-                    error: {},
+                    errors: {},
                     currentUser: {
                         id: user.id,
                         name: user.name,
@@ -41,12 +41,10 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: {},
+                errors: {},
             };
         }
-        case SIGNUP: {
-            return state;
-        }
-        case SIGNUP_ERROR: {
+        case SIGNUP_REDUCER: {
             if (action.payload.error) {
                 return {
                     ...state,
@@ -61,7 +59,7 @@ const rootReducer = (state = initialState, action) => {
                 };
             }
         }
-        case RECIEVE_PROPERTIES:
+        case FETCH_PROPERTIES:
             return {
                 ...state,
                 properties: action.payload,

@@ -1,20 +1,7 @@
-import {
-    LOGIN_REQUEST,
-    LOGIN_TOKEN,
-    LOGOUT,
-    SIGNUP,
-    SIGNUP_ERROR,
-    REQUEST_PROPERTIES,
-    RECIEVE_PROPERTIES,
-} from './types';
+import { LOGIN, LOGOUT, SIGNUP, FETCH_PROPERTIES } from './types';
 
-export const loginRequest = payload => ({
-    type: LOGIN_REQUEST,
-    payload,
-});
-
-export const loginToken = payload => ({
-    type: LOGIN_TOKEN,
+export const login = payload => ({
+    type: LOGIN,
     payload,
 });
 
@@ -28,5 +15,5 @@ export const signup = payload => ({
 });
 
 export const requestProperties = () => ({
-    type: REQUEST_PROPERTIES,
+    type: FETCH_PROPERTIES,
 });

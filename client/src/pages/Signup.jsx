@@ -60,9 +60,6 @@ const Signup = props => {
                                 props.signup(values);
                                 setTimeout(() => {
                                     if (props.errors.message) {
-                                        setErrors(
-                                            props.errors.message,
-                                        );
                                         resetForm();
                                     } else {
                                         props.history.push('/login');

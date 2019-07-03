@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import Navbar from '../components/Navbar';
 
-import { loginRequest } from '../actions/creators';
+import { login } from '../actions/creators';
 
 const Login = props => {
     const [errors, setErrors] = React.useState('');
@@ -43,10 +43,9 @@ const Login = props => {
                             values,
                             { setSubmitting, resetForm },
                         ) => {
-                            props.loginRequest(values);
+                            props.login(values);
                             setTimeout(() => {
                                 if (props.errors.message) {
-                                    setErrors(props.errors.message);
                                     resetForm();
                                 } else {
                                     props.history.push('/');
@@ -120,7 +119,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loginRequest: value => dispatch(loginRequest(value)),
+    login: value => dispatch(login(value)),
 });
 
 export default connect(
