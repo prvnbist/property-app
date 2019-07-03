@@ -28,6 +28,21 @@ router.get('/', (req, res) => {
         });
 });
 
+// @route GET api/properties/:id
+// @desc Get properties
+// @access Public
+router.get('/:id', (req, res) => {
+    Property.findById(req.params.id)
+        .populate('user_id', 'name')
+        .exec((err, properties) => {
+            if (err)
+                return res
+                    .status(404)
+                    .json({ error: "Can't get user details!" });
+            res.status(200).json(properties);
+        });
+});
+
 // @route POST api/properties
 // @desc Add property
 // @access Protected
@@ -52,6 +67,9 @@ router.post('/', authorize, (req, res) => {
             const newProperty = new Property({
                 name: req.body.name,
                 price: req.body.price,
+                image: req.body.image,
+                location: req.body.location,
+                specs: req.body.specs,
                 user_id: user.id,
             });
             newProperty
@@ -85,6 +103,11 @@ router.put('/:id', authorize, (req, res) => {
                 const updatedData = {
                     ...(req.body.name && { name: req.body.name }),
                     ...(req.body.price && { price: req.body.price }),
+                    ...(req.body.image && { image: req.body.image }),
+                    ...(req.body.specs && { specs: req.body.specs }),
+                    ...(req.body.location && {
+                        location: req.body.location,
+                    }),
                     updatedAt: Date.now(),
                 };
                 Property.findByIdAndUpdate(

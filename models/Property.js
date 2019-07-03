@@ -13,6 +13,18 @@ const PropertySchema = new Schema(
             type: String,
             required: true,
         },
+        image: {
+            type: String,
+            // required: true,
+        },
+        location: {
+            type: String,
+            required: true,
+        },
+        specs: {
+            type: String,
+            required: true,
+        },
     },
     {
         timestamps: true,

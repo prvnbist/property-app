@@ -1,0 +1,12 @@
+#property__page {
+    z-index: 10;
+    transform: translateY(-120px);
+    display: flex;
+    .property__card {
+        width:100%;
+        height: auto;
+        .property__card__thumbnail {
+            height: 280px;
+        }
+    } 
+}

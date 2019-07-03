@@ -1,5 +1,6 @@
 import {
-    FETCH_PROPERTIES,
+    FETCH_PROPERTIES_REDUCER,
+    FETCH_PROPERTY_REDUCER,
     LOGOUT,
     LOGIN_REDUCER,
     SIGNUP_REDUCER,
@@ -59,10 +60,15 @@ const rootReducer = (state = initialState, action) => {
                 };
             }
         }
-        case FETCH_PROPERTIES:
+        case FETCH_PROPERTIES_REDUCER:
             return {
                 ...state,
                 properties: action.payload,
+            };
+        case FETCH_PROPERTY_REDUCER:
+            return {
+                ...state,
+                property: action.payload,
             };
         default:
             return state;
