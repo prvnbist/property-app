@@ -15,7 +15,6 @@ const composeEnhancer =
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['properties', 'property'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

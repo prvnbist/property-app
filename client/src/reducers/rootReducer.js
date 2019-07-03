@@ -1,6 +1,4 @@
 import {
-    FETCH_PROPERTIES_REDUCER,
-    FETCH_PROPERTY_REDUCER,
     LOGOUT,
     LOGIN_REDUCER,
     SIGNUP_REDUCER,
@@ -10,8 +8,6 @@ import jwtDecode from 'jwt-decode';
 const initialState = {
     currentUser: {},
     errors: {},
-    properties: [],
-    property: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -60,16 +56,6 @@ const rootReducer = (state = initialState, action) => {
                 };
             }
         }
-        case FETCH_PROPERTIES_REDUCER:
-            return {
-                ...state,
-                properties: action.payload,
-            };
-        case FETCH_PROPERTY_REDUCER:
-            return {
-                ...state,
-                property: action.payload,
-            };
         default:
             return state;
     }
