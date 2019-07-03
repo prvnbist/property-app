@@ -11,7 +11,6 @@ class Property extends React.Component {
     }
     render() {
         const { property } = this.props;
-        console.log(property);
         return (
             <div>
                 <Navbar />
@@ -29,6 +28,8 @@ class Property extends React.Component {
                                 style={{
                                     backgroundImage: `url(${
                                         property.image
+                                            ? property.image
+                                            : 'https://via.placeholder.com/1500x200'
                                     })`,
                                 }}
                             />
