@@ -10,12 +10,11 @@ const PropertySchema = new Schema(
             required: true,
         },
         price: {
-            type: String,
+            type: Number,
             required: true,
         },
         image: {
             type: String,
-            // required: true,
         },
         location: {
             type: String,

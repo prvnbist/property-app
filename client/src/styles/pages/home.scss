@@ -1,6 +1,56 @@
 header.homepage__header {
     height: 188px;
     background: #1152CF;
+    display: flex;
+    align-items: center;
+    #query {
+        transform: translateY(-12px);
+        display: flex;
+        label {
+            display: block;
+            color: #79A1EE;
+            margin-bottom: 8px;
+        }
+        input {
+            border: none;
+            height: 48px;
+            background: #467ADE;
+            color: #fff;
+            font-size: 16px;
+            width: 180px;
+            padding: 0 16px;
+            &::placeholder {
+                color: #fff;
+            }
+            &:focus {
+                outline: transparent;
+            }
+            &:first-child {
+                border-right: 1px solid #1152CF;
+            }
+        }
+        button {
+            margin-left: 16px;
+            align-self: flex-end;
+            height: 48px;
+        }
+        label[for="sort"] {
+            margin-left: 16px;
+        }
+        select {
+            margin-left: 16px;
+            border: none;
+            height: 48px;
+            background: #467ADE;
+            color: #fff;
+            font-size: 16px;
+            width: 180px;
+            padding: 0 16px;
+            &::placeholder {
+                color: #fff;
+            }
+        }
+    }
 }
 
 .homepage__main {
@@ -30,7 +80,7 @@ header.homepage__header {
                     font-weight: normal;
                     font-size: 18px;
                     line-height: 28px;
-                    color:#000;
+                    color: #000;
                 }
                 span {
                     font-weight: normal;
@@ -45,7 +95,7 @@ header.homepage__header {
                     font-weight: normal;
                     font-size: 16px;
                     line-height: 28px;
-                    color:#000;
+                    color: #000;
                 }
                 span {
                     font-weight: normal;

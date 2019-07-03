@@ -17,7 +17,36 @@ const authorize = require('../../validation/authorize');
 // @desc Get properties
 // @access Public
 router.get('/', (req, res) => {
-    Property.find({})
+    let options = {};
+    if (req.query.sortByPrice) {
+        options.sort = {
+            price: req.query.sortByPrice === 'asc' ? 1 : -1,
+        };
+    }
+    if (req.query.limit) {
+        options.limit = Number(req.query.limit);
+    }
+
+    let filters = {};
+    if (req.query.minPrice) {
+        filters = {
+            price: { $gte: Number(req.query.minPrice) },
+        };
+    }
+    if (req.query.maxPrice) {
+        filters = {
+            price: { $lte: Number(req.query.maxPrice) },
+        };
+    }
+    if (req.query.maxPrice && req.query.minPrice) {
+        filters = {
+            price: {
+                $gte: Number(req.query.minPrice),
+                $lte: Number(req.query.maxPrice),
+            },
+        };
+    }
+    Property.find(filters, {}, options)
         .populate('user_id', 'name')
         .exec((err, properties) => {
             if (err)
@@ -25,6 +54,7 @@ router.get('/', (req, res) => {
                     .status(404)
                     .json({ error: "Can't get user details!" });
             res.status(200).json(properties);
+            return;
         });
 });
 
