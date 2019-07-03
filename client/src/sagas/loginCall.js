@@ -12,7 +12,11 @@ const loginCall = async ({ payload }) => {
             }),
         });
         const data = await response.json();
-        return data.token.split(' ')[1];
+        if (data.error) {
+            return data;
+        } else {
+            return data.token.split(' ')[1];
+        }
     } catch (e) {
         console.log(e);
     }

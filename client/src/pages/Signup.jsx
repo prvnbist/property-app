@@ -30,7 +30,7 @@ const Signup = props => {
     return (
         <div>
             <Navbar />
-            <header className="container__fluid" />
+            <header className="container__fluid homepage__header" />
             <div className="container__fluid">
                 <div className="container auth__page">
                     <div className="login__illo">
@@ -48,18 +48,22 @@ const Signup = props => {
                         )}
                         <Formik
                             initialValues={{
-                                email: 'bezzle0@time.com',
-                                password: 'HFzSct1@',
-                                name: 'Bartholomeo Ezzle',
+                                email: '',
+                                password: '',
+                                name: '',
                             }}
                             validationSchema={SignupSchema}
-                            onSubmit={(values, { setSubmitting }) => {
+                            onSubmit={(
+                                values,
+                                { setSubmitting, resetForm },
+                            ) => {
                                 props.signup(values);
                                 setTimeout(() => {
                                     if (props.errors.message) {
                                         setErrors(
                                             props.errors.message,
                                         );
+                                        resetForm();
                                     } else {
                                         props.history.push('/login');
                                     }

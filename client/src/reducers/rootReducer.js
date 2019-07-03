@@ -16,15 +16,25 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_TOKEN: {
-            localStorage.setItem('access-token', action.payload);
-            const user = jwtDecode(action.payload);
-            return {
-                ...state,
-                currentUser: {
-                    id: user.id,
-                    name: user.name,
-                },
-            };
+            if (action.payload.error) {
+                return {
+                    ...state,
+                    errors: {
+                        message: action.payload.error,
+                    },
+                };
+            } else {
+                localStorage.setItem('access-token', action.payload);
+                const user = jwtDecode(action.payload);
+                return {
+                    ...state,
+                    error: {},
+                    currentUser: {
+                        id: user.id,
+                        name: user.name,
+                    },
+                };
+            }
         }
         case LOGOUT: {
             localStorage.removeItem('access-token');

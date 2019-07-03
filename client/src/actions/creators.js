@@ -27,16 +27,6 @@ export const signup = payload => ({
     payload,
 });
 
-export const signupError = payload => ({
-    type: SIGNUP_ERROR,
-    payload,
-});
-
 export const requestProperties = () => ({
     type: REQUEST_PROPERTIES,
-});
-
-export const recieveProperties = payload => ({
-    type: RECIEVE_PROPERTIES,
-    payload,
 });

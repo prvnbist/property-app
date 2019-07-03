@@ -2,14 +2,12 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 
 import {
     REQUEST_PROPERTIES,
+    RECIEVE_PROPERTIES,
     LOGIN_REQUEST,
     SIGNUP,
+    LOGIN_TOKEN,
+    SIGNUP_ERROR,
 } from '../actions/types';
-import {
-    recieveProperties,
-    loginToken,
-    signupError,
-} from '../actions/creators';
 
 import { fetchProperties } from './fetchProperties';
 import loginCall from './loginCall';
@@ -18,7 +16,7 @@ import signupCall from './signupCall';
 function* getAllProperties() {
     try {
         const data = yield call(fetchProperties);
-        yield put(recieveProperties(data));
+        yield put({ type: RECIEVE_PROPERTIES, payload: data });
     } catch (e) {
         console.log(e);
     }
@@ -27,7 +25,7 @@ function* getAllProperties() {
 function* loginUser(payload) {
     try {
         const data = yield call(loginCall, payload);
-        yield put(loginToken(data));
+        yield put({ type: LOGIN_TOKEN, payload: data });
     } catch (e) {
         console.log(e);
     }
@@ -36,7 +34,7 @@ function* loginUser(payload) {
 function* signupUser(payload) {
     try {
         const data = yield call(signupCall, payload);
-        yield put(signupError(data));
+        yield put({ type: SIGNUP_ERROR, payload: data });
     } catch (e) {
         console.log(e);
     }
