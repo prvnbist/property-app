@@ -16,7 +16,7 @@ class Home extends React.Component {
             <div>
                 <Navbar />
                 <header className="container__fluid homepage__header">
-                    <div className="container">header</div>
+                    <div className="container" />
                 </header>
                 <main className="container homepage__main">
                     {!data ? (

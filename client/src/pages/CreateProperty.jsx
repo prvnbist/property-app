@@ -46,6 +46,7 @@ const CreateProperty = props => {
                             ) => {
                                 props.createProperty(values);
                                 setTimeout(() => {
+                                    resetForm();
                                     setSubmitting(false);
                                 }, 500);
                             }}
@@ -123,7 +124,7 @@ const CreateProperty = props => {
                                         placeholder="Enter comma separated amenities"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.lcoation}
+                                        value={values.amenities}
                                     />
                                     {touched.amenities &&
                                         errors.amenities && (
