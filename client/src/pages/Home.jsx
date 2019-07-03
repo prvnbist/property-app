@@ -33,6 +33,8 @@ class Home extends React.Component {
                                         style={{
                                             backgroundImage: `url(${
                                                 property.image
+                                                    ? property.image
+                                                    : 'https://via.placeholder.com/300x150'
                                             })`,
                                         }}
                                     />
