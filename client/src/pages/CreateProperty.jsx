@@ -19,11 +19,9 @@ const CreateProperty = props => {
     return (
         <div>
             <Navbar />
-            <header className="container__fluid homepage__header">
-                <div className="container">header</div>
-            </header>
+            <header className="container__fluid homepage__header" />
             <main className="container">
-                <div className="container auth__page">
+                <div className="auth__page">
                     <div className="login__illo">
                         <img
                             src="https://res.cloudinary.com/prvnbist/image/upload/v1562069703/Propery-App/form_illo.svg"
