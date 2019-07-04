@@ -33,11 +33,11 @@ class Login extends React.Component {
                     </div>
                     <div className="login__form">
                         <h3>Login</h3>
-                        {/* {this.props.errors !== '' && (
+                        {this.props.errors !== '' && (
                             <span className="error__message">
-                                {this.props.errors}
+                                {`${this.props.errors}`}
                             </span>
-                        )} */}
+                        )}
                         <Formik
                             initialValues={{
                                 email: '',

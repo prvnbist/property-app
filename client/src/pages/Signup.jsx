@@ -48,7 +48,7 @@ class Signup extends React.Component {
                             <h3>Signup</h3>
                             {this.props.errors !== '' && (
                                 <span className="error__message">
-                                    {this.props.errors}
+                                    {`${this.props.errors}`}
                                 </span>
                             )}
                             <Formik
