@@ -14,6 +14,11 @@ const Login = props => {
             .required('Email is required!'),
         password: Yup.string().required('Password is required!'),
     });
+    const redirect = () => {
+        if (localStorage.getItem('access-token')) {
+            props.history.push('/');
+        }
+    };
     return (
         <div>
             <Navbar />
@@ -27,11 +32,13 @@ const Login = props => {
                 </div>
                 <div className="login__form">
                     <h3>Login</h3>
-                    {props.errors.message && (
+                    {props.errors !== '' && (
                         <span className="error__message">
-                            {props.errors.message}
+                            {props.errors}
                         </span>
                     )}
+                    {/* Will keep looking for a better way to do redirection */}
+                    {props.currentUser.id ? redirect() : null}
                     <Formik
                         initialValues={{
                             email: '',
@@ -44,11 +51,7 @@ const Login = props => {
                         ) => {
                             props.login(values);
                             setTimeout(() => {
-                                if (props.currentUser) {
-                                    props.history.push('/');
-                                } else {
-                                    resetForm();
-                                }
+                                resetForm();
                                 setSubmitting(false);
                             }, 500);
                         }}

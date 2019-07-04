@@ -91,7 +91,10 @@ router.post('/login', (req, res) => {
         if (!user) {
             return res
                 .status(404)
-                .json({ error: 'Email not found', status: 404 });
+                .json({
+                    error: 'Incorrect email or password!',
+                    status: 404,
+                });
         }
 
         // Check password
@@ -120,7 +123,7 @@ router.post('/login', (req, res) => {
                 );
             } else {
                 return res.status(400).json({
-                    error: 'Password incorrect',
+                    error: 'Incorrect email or password!',
                     status: 400,
                 });
             }

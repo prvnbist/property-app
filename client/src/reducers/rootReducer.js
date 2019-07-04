@@ -8,7 +8,7 @@ import jwtDecode from 'jwt-decode';
 
 const initialState = {
     currentUser: {},
-    errors: {},
+    errors: '',
     propertyMessages: '',
 };
 
@@ -18,16 +18,14 @@ const rootReducer = (state = initialState, action) => {
             if (action.payload.error) {
                 return {
                     ...state,
-                    errors: {
-                        message: action.payload.error,
-                    },
+                    errors: action.payload.error,
                 };
             } else {
                 localStorage.setItem('access-token', action.payload);
                 const user = jwtDecode(action.payload);
                 return {
                     ...state,
-                    errors: {},
+                    errors: '',
                     currentUser: {
                         id: user.id,
                         name: user.name,
@@ -40,7 +38,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: {},
-                errors: {},
+                errors: '',
             };
         }
         case PROPERTY_MESSAGES: {
