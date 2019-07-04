@@ -4,7 +4,7 @@
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
-    line-height: 25px;
+    line-height: 42px;
     border: none;
     cursor: pointer;
 }
@@ -18,4 +18,10 @@
     border: 1px solid #FFFFFF;
     background: transparent;
     color: #fff;
+}
+
+.btn__outline__light {
+    border: 1px solid #1152CF;
+    background: transparent;
+    color: #000;
 }

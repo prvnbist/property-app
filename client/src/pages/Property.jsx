@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
 
+import { deleteProperty } from '../actions/creators';
+
 const Property = props => {
     const [property, setProperty] = React.useState({});
     React.useEffect(() => {
@@ -49,18 +51,37 @@ const Property = props => {
                                 <div>
                                     {props.currentUser.id ===
                                     property.user_id._id ? (
-                                        <Link
-                                            to={`/edit/${
-                                                property._id
-                                            }`}
-                                        >
-                                            <button
-                                                type="button"
-                                                className="btn btn__primary"
+                                        <React.Fragment>
+                                            <Link
+                                                to={`/edit/${
+                                                    property._id
+                                                }`}
                                             >
-                                                Edit
-                                            </button>
-                                        </Link>
+                                                <button
+                                                    type="button"
+                                                    className="btn btn__primary"
+                                                >
+                                                    Edit
+                                                </button>
+                                            </Link>
+                                            <Link to="/">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn__outline__light"
+                                                    style={{
+                                                        marginLeft:
+                                                            '16px',
+                                                    }}
+                                                    onClick={() =>
+                                                        props.deleteProperty(
+                                                            property._id,
+                                                        )
+                                                    }
+                                                >
+                                                    Delete
+                                                </button>
+                                            </Link>
+                                        </React.Fragment>
                                     ) : null}
                                 </div>
                             </div>
@@ -82,5 +103,10 @@ const Property = props => {
 };
 
 const mapStateToProps = state => ({ currentUser: state.currentUser });
-
-export default connect(mapStateToProps)(Property);
+const mapDispatchToProps = dispatch => ({
+    deleteProperty: id => dispatch(deleteProperty(id)),
+});
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Property);

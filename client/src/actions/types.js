@@ -1,8 +1,9 @@
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 export const SIGNUP = 'SIGNUP';
-export const AUTH_REDUCER = 'AUTH_REDUCER';
+export const AUTH = 'AUTH';
 export const CREATE_PROPERTY = 'CREATE_PROPERTY';
 export const CREATE_PROPERTY_REDUCER = 'CREATE_PROPERTY_REDUCER';
 export const EDIT_PROPERTY = 'EDIT_PROPERTY';
 export const EDIT_PROPERTY_REDUCER = 'EDIT_PROPERTY_REDUCER';
+export const DELETE_PROPERTY = 'DELETE_PROPERTY';

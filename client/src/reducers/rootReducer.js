@@ -1,4 +1,4 @@
-import { LOGOUT, AUTH_REDUCER } from '../actions/types';
+import { LOGOUT, AUTH } from '../actions/types';
 import jwtDecode from 'jwt-decode';
 
 const initialState = {
@@ -8,7 +8,7 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case AUTH_REDUCER: {
+        case AUTH: {
             if (action.payload.error) {
                 return {
                     ...state,
