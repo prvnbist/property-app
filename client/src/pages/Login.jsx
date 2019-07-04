@@ -14,6 +14,12 @@ class Login extends React.Component {
         }
     }
     render() {
+        const loginSchema = Yup.object().shape({
+            email: Yup.string()
+                .email('Please enter a valid email!')
+                .required('Email is required!'),
+            password: Yup.string().required('Password is required!'),
+        });
         return (
             <div>
                 <Navbar />
@@ -27,30 +33,17 @@ class Login extends React.Component {
                     </div>
                     <div className="login__form">
                         <h3>Login</h3>
-                        {this.props.errors !== '' && (
+                        {/* {this.props.errors !== '' && (
                             <span className="error__message">
                                 {this.props.errors}
                             </span>
-                        )}
+                        )} */}
                         <Formik
                             initialValues={{
                                 email: '',
                                 password: '',
                             }}
-                            validationSchema={() =>
-                                Yup.object().shape({
-                                    email: Yup.string()
-                                        .email(
-                                            'Please enter a valid email!',
-                                        )
-                                        .required(
-                                            'Email is required!',
-                                        ),
-                                    password: Yup.string().required(
-                                        'Password is required!',
-                                    ),
-                                })
-                            }
+                            validationSchema={loginSchema}
                             onSubmit={(
                                 values,
                                 { setSubmitting, resetForm },
