@@ -58,13 +58,11 @@ const Signup = props => {
                             ) => {
                                 props.signup(values);
                                 setTimeout(() => {
-                                    if (
-                                        localStorage.getItem(
-                                            'access-token',
-                                        )
-                                    ) {
+                                    if (props.currentUser) {
+                                        console.log('hit psuh');
                                         props.history.push('/');
                                     } else {
+                                        console.log('reset form');
                                         resetForm();
                                     }
                                     setSubmitting(false);
@@ -149,7 +147,10 @@ const Signup = props => {
     );
 };
 
-const mapStateToProps = state => ({ errors: state.errors });
+const mapStateToProps = state => ({
+    currentUser: state.currentUser,
+    errors: state.errors,
+});
 
 const mapDispatchToProps = dispatch => ({
     signup: value => dispatch(signup(value)),

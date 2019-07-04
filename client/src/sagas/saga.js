@@ -9,6 +9,7 @@ import {
 
 import { makeProperty } from './makeProperty';
 import loginCall from './loginCall';
+import signupCall from './signupCall';
 
 function* addProperty({ payload }) {
     try {
@@ -18,9 +19,17 @@ function* addProperty({ payload }) {
     }
 }
 
-function* auth(payload) {
+function* loginSaga(payload) {
     try {
         const data = yield call(loginCall, payload);
+        yield put({ type: AUTH_REDUCER, payload: data });
+    } catch (e) {
+        console.log(e);
+    }
+}
+function* signupSaga(payload) {
+    try {
+        const data = yield call(signupCall, payload);
         yield put({ type: AUTH_REDUCER, payload: data });
     } catch (e) {
         console.log(e);
@@ -30,7 +39,7 @@ function* auth(payload) {
 export default function* watchAll() {
     yield all([
         takeEvery(CREATE_PROPERTY, addProperty),
-        takeEvery(LOGIN, auth),
-        takeEvery(SIGNUP, auth),
+        takeEvery(LOGIN, loginSaga),
+        takeEvery(SIGNUP, signupSaga),
     ]);
 }

@@ -44,11 +44,7 @@ const Login = props => {
                         ) => {
                             props.login(values);
                             setTimeout(() => {
-                                if (
-                                    localStorage.getItem(
-                                        'access-token',
-                                    )
-                                ) {
+                                if (props.currentUser) {
                                     props.history.push('/');
                                 } else {
                                     resetForm();
