@@ -14,12 +14,6 @@ class Login extends React.Component {
         }
     }
     render() {
-        const LoginSchema = Yup.object().shape({
-            email: Yup.string()
-                .email('Please enter a valid email!')
-                .required('Email is required!'),
-            password: Yup.string().required('Password is required!'),
-        });
         return (
             <div>
                 <Navbar />
@@ -43,14 +37,29 @@ class Login extends React.Component {
                                 email: '',
                                 password: '',
                             }}
-                            validationSchema={() => LoginSchema()}
+                            validationSchema={() =>
+                                Yup.object().shape({
+                                    email: Yup.string()
+                                        .email(
+                                            'Please enter a valid email!',
+                                        )
+                                        .required(
+                                            'Email is required!',
+                                        ),
+                                    password: Yup.string().required(
+                                        'Password is required!',
+                                    ),
+                                })
+                            }
                             onSubmit={(
                                 values,
                                 { setSubmitting, resetForm },
                             ) => {
                                 this.props.login(values);
                                 resetForm();
-                                setSubmitting(false);
+                                setTimeout(() => {
+                                    setSubmitting(false);
+                                }, 500);
                             }}
                         >
                             {({
