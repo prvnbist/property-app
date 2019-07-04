@@ -43,16 +43,14 @@ class Login extends React.Component {
                                 email: '',
                                 password: '',
                             }}
-                            validationSchema={LoginSchema}
+                            validationSchema={() => LoginSchema()}
                             onSubmit={(
                                 values,
                                 { setSubmitting, resetForm },
                             ) => {
                                 this.props.login(values);
-                                setTimeout(() => {
-                                    resetForm();
-                                    setSubmitting(false);
-                                }, 1000);
+                                resetForm();
+                                setSubmitting(false);
                             }}
                         >
                             {({
@@ -76,7 +74,7 @@ class Login extends React.Component {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.email}
-                                    />{' '}
+                                    />
                                     {touched.email &&
                                         errors.email && (
                                             <span className="error__message">
@@ -94,7 +92,7 @@ class Login extends React.Component {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.password}
-                                    />{' '}
+                                    />
                                     {touched.password &&
                                         errors.password && (
                                             <span className="error__message">

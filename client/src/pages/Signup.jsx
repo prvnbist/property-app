@@ -57,16 +57,14 @@ class Signup extends React.Component {
                                     password: '',
                                     name: '',
                                 }}
-                                validationSchema={SignupSchema}
+                                validationSchema={() => SignupSchema}
                                 onSubmit={(
                                     values,
                                     { setSubmitting, resetForm },
                                 ) => {
                                     this.props.signup(values);
-                                    setTimeout(() => {
-                                        resetForm();
-                                        setSubmitting(false);
-                                    }, 400);
+                                    resetForm();
+                                    setSubmitting(false);
                                 }}
                             >
                                 {({
@@ -90,7 +88,7 @@ class Signup extends React.Component {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.name}
-                                        />{' '}
+                                        />
                                         {touched.name &&
                                             errors.name && (
                                                 <span className="error__message">
@@ -108,7 +106,7 @@ class Signup extends React.Component {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.email}
-                                        />{' '}
+                                        />
                                         {touched.email &&
                                             errors.email && (
                                                 <span className="error__message">
@@ -126,7 +124,7 @@ class Signup extends React.Component {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.password}
-                                        />{' '}
+                                        />
                                         {touched.password &&
                                             errors.password && (
                                                 <span className="error__message">
