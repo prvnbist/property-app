@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
 
 const Property = props => {
-    const [property, setProperty] = React.useState([]);
+    const [property, setProperty] = React.useState({});
     React.useEffect(() => {
         const getProperties = async url => {
             const response = await fetch(url);
@@ -12,7 +14,7 @@ const Property = props => {
             return data;
         };
         getProperties(`/api/properties/${props.match.params.id}`);
-    }, []);
+    }, [props.match.params.id]);
     return (
         <div>
             <Navbar />
@@ -36,12 +38,31 @@ const Property = props => {
                             }}
                         />
                         <div className="property__card__details">
-                            <div>
-                                <h3>{property.name}</h3>
-                                <span>
-                                    by
-                                    {property.user_id.name}
-                                </span>
+                            <div id="top__row">
+                                <div>
+                                    <h3>{property.name}</h3>
+                                    <span>
+                                        by
+                                        {property.user_id.name}
+                                    </span>
+                                </div>
+                                <div>
+                                    {props.currentUser.id ===
+                                    property.user_id._id ? (
+                                        <Link
+                                            to={`/edit/${
+                                                property._id
+                                            }`}
+                                        >
+                                            <button
+                                                type="button"
+                                                className="btn btn__primary"
+                                            >
+                                                Edit
+                                            </button>
+                                        </Link>
+                                    ) : null}
+                                </div>
                             </div>
                             <div>
                                 <h3>{property.specs}</h3>
@@ -60,4 +81,6 @@ const Property = props => {
     );
 };
 
-export default Property;
+const mapStateToProps = state => ({ currentUser: state.currentUser });
+
+export default connect(mapStateToProps)(Property);

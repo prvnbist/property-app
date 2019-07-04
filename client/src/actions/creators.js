@@ -1,4 +1,10 @@
-import { LOGIN, LOGOUT, SIGNUP, CREATE_PROPERTY } from './types';
+import {
+    LOGIN,
+    LOGOUT,
+    SIGNUP,
+    CREATE_PROPERTY,
+    EDIT_PROPERTY,
+} from './types';
 
 export const login = payload => ({
     type: LOGIN,
@@ -16,5 +22,10 @@ export const signup = payload => ({
 
 export const createProperty = payload => ({
     type: CREATE_PROPERTY,
+    payload,
+});
+
+export const editProperty = payload => ({
+    type: EDIT_PROPERTY,
     payload,
 });

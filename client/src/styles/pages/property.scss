@@ -8,5 +8,16 @@
         .property__card__thumbnail {
             height: 280px;
         }
+        #top__row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            div {
+                padding: 0;
+                &:nth-child(1) {
+                    border-bottom: none;
+                }
+            }
+        }
     } 
 }

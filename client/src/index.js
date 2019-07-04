@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Property from './pages/Property';
 import CreateProperty from './pages/CreateProperty';
+import EditProperty from './pages/EditProperty';
 
 import { store, persistor } from './store/store';
 
@@ -24,6 +25,7 @@ ReactDOM.render(
                 <Route path="/signup" component={Signup} />
                 <Route path="/properties/:id" component={Property} />
                 <Route path="/create" component={CreateProperty} />
+                <Route path="/edit/:id" component={EditProperty} />
             </Router>
         </PersistGate>
     </Provider>,
