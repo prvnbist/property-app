@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
 
-import { deleteProperty } from '../actions/creators';
+import { deleteProperty, clearMessages } from '../actions/creators';
 
 const Property = props => {
     const [property, setProperty] = React.useState({});
@@ -72,11 +72,16 @@ const Property = props => {
                                                         marginLeft:
                                                             '16px',
                                                     }}
-                                                    onClick={() =>
+                                                    onClick={() => {
                                                         props.deleteProperty(
                                                             property._id,
-                                                        )
-                                                    }
+                                                        );
+                                                        setTimeout(
+                                                            () =>
+                                                                props.clearMessages(),
+                                                            3000,
+                                                        );
+                                                    }}
                                                 >
                                                     Delete
                                                 </button>
@@ -105,6 +110,7 @@ const Property = props => {
 const mapStateToProps = state => ({ currentUser: state.currentUser });
 const mapDispatchToProps = dispatch => ({
     deleteProperty: id => dispatch(deleteProperty(id)),
+    clearMessages: () => dispatch(clearMessages()),
 });
 export default connect(
     mapStateToProps,

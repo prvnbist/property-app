@@ -7,6 +7,7 @@ import {
     CREATE_PROPERTY,
     EDIT_PROPERTY,
     DELETE_PROPERTY,
+    PROPERTY_MESSAGES,
 } from '../actions/types';
 
 import { makeProperty } from './makeProperty';
@@ -17,7 +18,8 @@ import signupCall from './signupCall';
 
 function* addProperty({ payload }) {
     try {
-        yield call(makeProperty, payload);
+        const data = yield call(makeProperty, payload);
+        yield put({ type: PROPERTY_MESSAGES, payload: data });
     } catch (e) {
         console.log(e);
     }
@@ -25,7 +27,8 @@ function* addProperty({ payload }) {
 
 function* editProperty({ payload }) {
     try {
-        yield call(updateProperty, payload);
+        const data = yield call(updateProperty, payload);
+        yield put({ type: PROPERTY_MESSAGES, payload: data });
     } catch (e) {
         console.log(e);
     }
@@ -33,7 +36,8 @@ function* editProperty({ payload }) {
 
 function* deleteProperty({ payload }) {
     try {
-        yield call(removeProperty, payload);
+        const data = yield call(removeProperty, payload);
+        yield put({ type: PROPERTY_MESSAGES, payload: data });
     } catch (e) {
         console.log(e);
     }

@@ -110,7 +110,10 @@ router.post('/', authorize, (req, res) => {
                         { $push: { properties: property.id } },
                         { new: true },
                     ).then(() => {});
-                    res.json(property);
+                    res.json({
+                        message: 'Property has been added!',
+                        status: 200,
+                    });
                 })
                 .catch(err => console.log(err));
         }

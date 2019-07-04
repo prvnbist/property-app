@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import Navbar from '../components/Navbar';
 
-import { editProperty } from '../actions/creators';
+import { editProperty, clearMessages } from '../actions/creators';
 
 const EditProperty = props => {
     const [property, setProperty] = React.useState({});
@@ -40,6 +40,11 @@ const EditProperty = props => {
                     </div>
                     <div className="login__form">
                         <h3>Edit Property</h3>
+                        {props.propertyMessages && (
+                            <span className="success__message">
+                                {props.propertyMessages.message}
+                            </span>
+                        )}
                         {Object.keys(property).length === 0 ? (
                             <div>Loading...</div>
                         ) : (
@@ -76,8 +81,9 @@ const EditProperty = props => {
                                     };
                                     props.editProperty(updatedData);
                                     setTimeout(() => {
+                                        props.clearMessages();
                                         setSubmitting(false);
-                                    }, 500);
+                                    }, 3000);
                                 }}
                             >
                                 {({
@@ -180,11 +186,16 @@ const EditProperty = props => {
     );
 };
 
+const mapStateToProps = state => ({
+    propertyMessages: state.propertyMessages,
+});
+
 const mapDispatchToProps = dispatch => ({
     editProperty: value => dispatch(editProperty(value)),
+    clearMessages: () => dispatch(clearMessages()),
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
 )(EditProperty);

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import Navbar from '../components/Navbar';
 
-import { createProperty } from '../actions/creators';
+import { createProperty, clearMessages } from '../actions/creators';
 
 const CreateProperty = props => {
     const CreateSchema = Yup.object().shape({
@@ -43,8 +43,10 @@ const CreateProperty = props => {
                                 { setSubmitting, resetForm },
                             ) => {
                                 props.createProperty(values);
+                                props.history.push('/');
                                 setTimeout(() => {
                                     resetForm();
+                                    props.clearMessages();
                                     setSubmitting(false);
                                 }, 500);
                             }}
@@ -149,6 +151,7 @@ const CreateProperty = props => {
 
 const mapDispatchToProps = dispatch => ({
     createProperty: value => dispatch(createProperty(value)),
+    clearMessages: () => dispatch(clearMessages()),
 });
 
 export default connect(

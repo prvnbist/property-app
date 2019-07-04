@@ -5,6 +5,7 @@ import {
     CREATE_PROPERTY,
     EDIT_PROPERTY,
     DELETE_PROPERTY,
+    CLEAR_MESSAGES,
 } from './types';
 
 export const login = payload => ({
@@ -34,4 +35,8 @@ export const editProperty = payload => ({
 export const deleteProperty = payload => ({
     type: DELETE_PROPERTY,
     payload,
+});
+
+export const clearMessages = () => ({
+    type: CLEAR_MESSAGES,
 });

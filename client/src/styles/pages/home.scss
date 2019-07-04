@@ -63,9 +63,13 @@ header.homepage__header {
         text-decoration: none;
     }
     .property__card {
-        height: 367px;
+        height: auto;
         background: #FFFFFF;
-        border: 1px solid #E5EDF1;
+        transition: border 0.3s ease-in-out;
+        &:hover .property__card__details {
+            border: 1px solid #467ADE;
+            border-top: none;
+        }
         .property__card__thumbnail {
             height: 180px;
             background-size: cover;
@@ -73,6 +77,9 @@ header.homepage__header {
             background-position: center top;
         }
         .property__card__details {
+            border: 1px solid #E5EDF1;
+            border-top: none;
+            transition: border 0.3s ease-in-out;
             div:first-child {
                 border-bottom: 1px solid #E5EDF1;
                 padding: 8px 16px;

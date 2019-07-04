@@ -37,6 +37,15 @@
     }
 }
 
+.success__message {
+    color: #fff;
+    padding: 7px 8px 5px 8px;
+    background: #22a222;
+    border-radius: 4px;
+    margin-top: 6px;
+    display: inline-block;
+}
+
 .error__message {
     margin-top: 8px;
     color: red;

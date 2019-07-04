@@ -1,9 +1,15 @@
-import { LOGOUT, AUTH } from '../actions/types';
+import {
+    LOGOUT,
+    AUTH,
+    PROPERTY_MESSAGES,
+    CLEAR_MESSAGES,
+} from '../actions/types';
 import jwtDecode from 'jwt-decode';
 
 const initialState = {
     currentUser: {},
     errors: {},
+    propertyMessages: '',
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -35,6 +41,18 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 currentUser: {},
                 errors: {},
+            };
+        }
+        case PROPERTY_MESSAGES: {
+            return {
+                ...state,
+                propertyMessages: action.payload,
+            };
+        }
+        case CLEAR_MESSAGES: {
+            return {
+                ...state,
+                propertyMessages: null,
             };
         }
         default:
