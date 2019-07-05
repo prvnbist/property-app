@@ -85,7 +85,7 @@ const CreateProperty = props => {
                                         type="text"
                                         name="price"
                                         id="price"
-                                        placeholder="Enter the price in LPA"
+                                        placeholder="Enter the price in Lakhs"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.price}

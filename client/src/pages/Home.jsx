@@ -54,7 +54,7 @@ const Home = props => {
             <header className="container__fluid homepage__header">
                 <div id="query" className="container">
                     <div id="filter__by__price">
-                        <label>Filter By Price(LPA)</label>
+                        <label>Filter By Price(In Lakhs)</label>
                         <div>
                             <input
                                 type="number"
@@ -151,7 +151,7 @@ const Home = props => {
                                         <h3 className="property__card__details__price">
                                             {`₹ ${
                                                 property.price
-                                            } LPA`}
+                                            } Lakhs`}
                                         </h3>
                                     </div>
                                 </div>

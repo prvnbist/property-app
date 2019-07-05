@@ -96,7 +96,7 @@ const Property = props => {
                             </div>
                             <div>
                                 <h3 className="property__card__details__price">
-                                    {`₹ ${property.price} LPA`}
+                                    {`₹ ${property.price} Lakhs`}
                                 </h3>
                             </div>
                         </div>

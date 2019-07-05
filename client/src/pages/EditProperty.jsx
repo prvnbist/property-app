@@ -107,7 +107,7 @@ const EditProperty = props => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.name}
-                                        />
+                                        />{' '}
                                         {touched.name &&
                                             errors.name && (
                                                 <span className="error__message">
@@ -121,11 +121,11 @@ const EditProperty = props => {
                                             type="text"
                                             name="price"
                                             id="price"
-                                            placeholder="Enter the price in LPA"
+                                            placeholder="Enter the price in Lakhs"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.price}
-                                        />
+                                        />{' '}
                                         {touched.price &&
                                             errors.price && (
                                                 <span className="error__message">
@@ -143,7 +143,7 @@ const EditProperty = props => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.location}
-                                        />
+                                        />{' '}
                                         {touched.location &&
                                             errors.location && (
                                                 <span className="error__message">
@@ -161,7 +161,7 @@ const EditProperty = props => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.amenities}
-                                        />
+                                        />{' '}
                                         {touched.amenities &&
                                             errors.amenities && (
                                                 <span className="error__message">
