@@ -1,11 +1,25 @@
 header.homepage__header {
-    height: 188px;
+    height: 260px;
     background: #1152CF;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     #query {
-        transform: translateY(-12px);
+        -webkit-transform: translateY(-12px);
+            -ms-transform: translateY(-12px);
+                transform: translateY(-12px);
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        #filter__by__price {
+            margin-right: 16px;
+            margin-bottom: 16px;
+        }
         label {
             display: block;
             color: #79A1EE;
@@ -19,6 +33,15 @@ header.homepage__header {
             font-size: 16px;
             width: 180px;
             padding: 0 16px;
+            &::-webkit-input-placeholder {
+                color: #fff;
+            }
+            &:-ms-input-placeholder {
+                color: #fff;
+            }
+            &::-ms-input-placeholder {
+                color: #fff;
+            }
             &::placeholder {
                 color: #fff;
             }
@@ -30,15 +53,14 @@ header.homepage__header {
             }
         }
         button {
-            margin-left: 16px;
-            align-self: flex-end;
+            -ms-flex-item-align: end;
+                align-self: flex-end;
             height: 48px;
-        }
-        label[for="sort"] {
-            margin-left: 16px;
+            margin-right: 16px;
+            margin-bottom: 16px;
         }
         select {
-            margin-left: 16px;
+            margin-right: 16px;
             border: none;
             height: 48px;
             background: #467ADE;
@@ -46,6 +68,15 @@ header.homepage__header {
             font-size: 16px;
             width: 180px;
             padding: 0 16px;
+            &::-webkit-input-placeholder {
+                color: #fff;
+            }
+            &:-ms-input-placeholder {
+                color: #fff;
+            }
+            &::-ms-input-placeholder {
+                color: #fff;
+            }
             &::placeholder {
                 color: #fff;
             }
@@ -55,8 +86,12 @@ header.homepage__header {
 
 .homepage__main {
     z-index: 10;
-    transform: translateY(-24px);
+    -webkit-transform: translateY(-24px);
+        -ms-transform: translateY(-24px);
+            transform: translateY(-24px);
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 24px 1fr 24px 1fr;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 24px;
     a {
@@ -65,6 +100,8 @@ header.homepage__header {
     .property__card {
         height: auto;
         background: #FFFFFF;
+        -webkit-transition: border 0.3s ease-in-out;
+        -o-transition: border 0.3s ease-in-out;
         transition: border 0.3s ease-in-out;
         &:hover .property__card__details {
             border: 1px solid #467ADE;
@@ -79,6 +116,8 @@ header.homepage__header {
         .property__card__details {
             border: 1px solid #E5EDF1;
             border-top: none;
+            -webkit-transition: border 0.3s ease-in-out;
+            -o-transition: border 0.3s ease-in-out;
             transition: border 0.3s ease-in-out;
             div:first-child {
                 border-bottom: 1px solid #E5EDF1;
@@ -119,6 +158,37 @@ header.homepage__header {
                     line-height: 28px;
                     color: #467ADE;
                 }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .homepage__main {
+        -ms-grid-columns: 1fr 24px 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+    header.homepage__header #query button {
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 567px) {
+    .homepage__main {
+        -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    }
+    header.homepage__header {
+        #query {
+            #filter__by__price {
+                width: 100%;
+                margin-right: 0;
+            }
+            select {
+                width: auto;
+            }
+            input {
+                width: 50%;
             }
         }
     }

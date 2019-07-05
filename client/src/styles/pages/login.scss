@@ -10,6 +10,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        img {
+            width: 80%;
+        }
     }
     .login__form {
         padding-left: 28px;
@@ -30,6 +33,7 @@
             border: 1px solid #E7E7E7;
             font-size: 16px;
             padding-left: 8px;
+            display: block;
         }
         button {
             margin-top: 16px;
@@ -50,4 +54,13 @@
     margin-top: 8px;
     color: red;
     display: block;
+}
+
+@media screen and (max-width:  567px) {
+    .auth__page {
+        grid-template-columns: 1fr;
+    }
+    .auth__page .login__illo img {
+        display: none;
+    }
 }

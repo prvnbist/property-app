@@ -4,9 +4,15 @@ nav {
     border-bottom: 1px solid #376DD5;
     .container {
         height: 64px;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
         button {
             margin-left: 16px;
         }
