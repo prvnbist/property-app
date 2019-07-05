@@ -1,5 +1,7 @@
 ## Property App
 
+Check out the demo [here](https://property-app-demo.herokuapp.com/ "Google's Homepage").
+
 ![Homepage](https://res.cloudinary.com/prvnbist/image/upload/v1562326012/Propery-App/2019-07-05_165106.png "Homepage")
 
 #### Tech Stack
