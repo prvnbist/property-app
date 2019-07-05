@@ -8,13 +8,16 @@ nav {
         display: -ms-flexbox;
         display: flex;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
         -webkit-box-pack: justify;
-            -ms-flex-pack: justify;
-                justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
         button {
             margin-left: 16px;
+        }
+        svg {
+            display: none;
         }
     }
 }
@@ -27,5 +30,17 @@ nav {
         font-weight: 450;
         font-size: 18px;
         line-height: 23px;
+    }
+}
+@media screen and (max-width:567px) {
+    nav {
+        .container {
+            svg {
+                display: block;
+            }
+            .nav__action__text {
+                display: none;
+            }
+        }
     }
 }
