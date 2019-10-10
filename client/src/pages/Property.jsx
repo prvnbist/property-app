@@ -33,8 +33,8 @@ const Property = props => {
                             className="property__card__thumbnail"
                             style={{
                                 backgroundImage: `url(${
-                                    property.image
-                                        ? property.image
+                                    property.images
+                                        ? property.images[0]
                                         : 'https://via.placeholder.com/1500x200'
                                 })`,
                             }}
@@ -53,9 +53,7 @@ const Property = props => {
                                     property.user_id._id ? (
                                         <React.Fragment>
                                             <Link
-                                                to={`/edit/${
-                                                    property._id
-                                                }`}
+                                                to={`/edit/${property._id}`}
                                             >
                                                 <button
                                                     type="button"

@@ -130,8 +130,8 @@ const Home = props => {
                                     className="property__card__thumbnail"
                                     style={{
                                         backgroundImage: `url(${
-                                            property.image
-                                                ? property.image
+                                            property.images
+                                                ? property.images[0]
                                                 : 'https://via.placeholder.com/300x150'
                                         })`,
                                     }}
