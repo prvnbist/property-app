@@ -13,9 +13,7 @@ const PropertySchema = new Schema(
             type: Number,
             required: true,
         },
-        image: {
-            type: String,
-        },
+        images: Array,
         location: {
             type: String,
             required: true,

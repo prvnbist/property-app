@@ -10,6 +10,9 @@ const validatePropertyInput = require('../../validation/property');
 const Property = require('../../models/Property');
 const User = require('../../models/User');
 
+const cloud = require('../../config/cloudinary');
+const upload = require('../../config/multer');
+
 // Authorize Requests
 const authorize = require('../../validation/authorize');
 
@@ -30,12 +33,16 @@ router.get('/', (req, res) => {
     let filters = {};
     if (req.query.minPrice) {
         filters = {
-            price: { $gte: Number(req.query.minPrice) },
+            price: {
+                $gte: Number(req.query.minPrice),
+            },
         };
     }
     if (req.query.maxPrice) {
         filters = {
-            price: { $lte: Number(req.query.maxPrice) },
+            price: {
+                $lte: Number(req.query.maxPrice),
+            },
         };
     }
     if (req.query.maxPrice && req.query.minPrice) {
@@ -48,6 +55,7 @@ router.get('/', (req, res) => {
     }
     Property.find(filters, {}, options)
         .populate('user_id', 'name')
+        .populate('image', 'image_url')
         .exec((err, properties) => {
             if (err)
                 return res
@@ -64,6 +72,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Property.findById(req.params.id)
         .populate('user_id', 'name')
+        .populate('image', 'image_url')
         .exec((err, properties) => {
             if (err)
                 return res
@@ -76,7 +85,7 @@ router.get('/:id', (req, res) => {
 // @route POST api/properties
 // @desc Add property
 // @access Protected
-router.post('/', authorize, (req, res) => {
+router.post('/', authorize, upload, (req, res) => {
     // Form validation
     const { errors, isValid } = validatePropertyInput(req.body);
     // Check validation
@@ -85,37 +94,45 @@ router.post('/', authorize, (req, res) => {
     }
     jwt.verify(req.token, process.env.HASH_SECRET, (err, user) => {
         if (err) {
-            //If error send Forbidden (403)
-            console.log(
-                'ERROR: Could not connect to the protected route',
-            );
             res.status(403).json({
                 error: "You're not authorized!",
                 status: 403,
             });
         } else {
-            const newProperty = new Property({
-                name: req.body.name,
-                price: req.body.price,
-                image: req.body.image,
-                location: req.body.location,
-                specs: req.body.specs,
-                user_id: user.id,
+            const filePaths = req.files.map(i => i.path);
+            cloud.uploads(filePaths).then(result => {
+                console.log(result);
+                res.json({
+                    data: result,
+                });
+                // const newProperty = new Property({
+                //     name: req.body.name,
+                //     price: req.body.price,
+                //     images: result,
+                //     location: req.body.location,
+                //     specs: req.body.specs,
+                //     user_id: user.id,
+                // });
+                // newProperty
+                //     .save()
+                //     .then(property => {
+                //         User.findByIdAndUpdate(
+                //             {
+                //                 _id: user.id,
+                //             },
+                //             {
+                //                 $push: {
+                //                     properties: property.id,
+                //                 },
+                //             },
+                //             {
+                //                 new: true,
+                //             },
+                //         ).then(() => {});
+                //         res.json(property);
+                //     })
+                //     .catch(err => console.log(err));
             });
-            newProperty
-                .save()
-                .then(property => {
-                    User.findByIdAndUpdate(
-                        { _id: user.id },
-                        { $push: { properties: property.id } },
-                        { new: true },
-                    ).then(() => {});
-                    res.json({
-                        message: 'Property has been added!',
-                        status: 200,
-                    });
-                })
-                .catch(err => console.log(err));
         }
     });
 });
@@ -134,10 +151,18 @@ router.put('/:id', authorize, (req, res) => {
         Property.findById(req.params.id).then(property => {
             if (property.user_id + '' === user.id) {
                 const updatedData = {
-                    ...(req.body.name && { name: req.body.name }),
-                    ...(req.body.price && { price: req.body.price }),
-                    ...(req.body.image && { image: req.body.image }),
-                    ...(req.body.specs && { specs: req.body.specs }),
+                    ...(req.body.name && {
+                        name: req.body.name,
+                    }),
+                    ...(req.body.price && {
+                        price: req.body.price,
+                    }),
+                    ...(req.body.image && {
+                        image: req.body.image,
+                    }),
+                    ...(req.body.specs && {
+                        specs: req.body.specs,
+                    }),
                     ...(req.body.location && {
                         location: req.body.location,
                     }),
@@ -147,8 +172,12 @@ router.put('/:id', authorize, (req, res) => {
                     {
                         _id: req.params.id,
                     },
-                    { $set: updatedData },
-                    { new: true },
+                    {
+                        $set: updatedData,
+                    },
+                    {
+                        new: true,
+                    },
                 ).then(_ =>
                     res.status(200).json({
                         message: 'Property details has been updated!',
