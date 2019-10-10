@@ -82,7 +82,7 @@ const Home = props => {
                             />
                         </div>
                     </div>
-                    <div id="sort__by__price">
+                    <div>
                         <label htmlFor="sort">Sort By Price</label>
                         <select
                             name="sort"
@@ -99,21 +99,19 @@ const Home = props => {
                             <option value="desc">Descending</option>
                         </select>
                     </div>
-                    <div id="apply__filters">
-                        <button
-                            type="button"
-                            className="btn btn__primary"
-                            onClick={() => applyFilters()}
-                        >
-                            Apply
-                        </button>
-                        <button
-                            className="btn btn__outline"
-                            onClick={() => clearFilter()}
-                        >
-                            Clear
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        className="btn btn__primary"
+                        onClick={() => applyFilters()}
+                    >
+                        Apply
+                    </button>
+                    <button
+                        className="btn btn__outline"
+                        onClick={() => clearFilter()}
+                    >
+                        Clear
+                    </button>
                 </div>
             </header>
             <main className="container homepage__main">
